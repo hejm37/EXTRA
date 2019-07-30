@@ -1,6 +1,6 @@
-function x_his = extra(M_adj, Ms, ys, W, varargin)
+function x_his = extra(Ms, ys, W, varargin)
 % Implementation of EXTRA on Logistic problem
-    n = length(M_adj);
+    n = size(Ms, 3);
     p = size(Ms, 1);
     
     defaultAlpha = 0.0059;
@@ -23,9 +23,6 @@ function x_his = extra(M_adj, Ms, ys, W, varargin)
     xs_k_1 = zeros(p, n);
     xs_k = zeros(p, n);
     
-    fprintf("alpha");
-    alpha
-    
 %     parfor i = 1:n
     for i = 1:n
         xs_k_1(:,i) = sum(W(:,i) .* xs_k_2.').' - ...
@@ -42,9 +39,6 @@ function x_his = extra(M_adj, Ms, ys, W, varargin)
                         (derivative(Ms(:,:,i), ys(:,i), xs_k_1(:,i)) ...
                         - derivative(Ms(:,:,i), ys(:,i), xs_k_2(:,i)));
         end
-        fprintf("%d\n", k);
-        dbstop if naninf
-%         xs_k
 
         x_his(:,:,k) = xs_k;
         xs_k_2 = xs_k_1;

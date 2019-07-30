@@ -1,6 +1,6 @@
-function x_his = centralized(M_adj, Ms, ys, varargin)
+function x_his = centralized(Ms, ys, varargin)
 % Implementation of EXTRA on Logistic problem
-    n = length(M_adj);
+    n = size(Ms, 3);
     p = size(Ms, 1);
     
     defaultAlpha = 0.5;
@@ -17,7 +17,7 @@ function x_his = centralized(M_adj, Ms, ys, varargin)
     xk_1 = par.Results.x0;
     x_his = zeros(p, itr);
 
-    % main iteration loop    
+    % main iteration loop
     for k = 1:itr
         xk = xk_1 - alpha * derivative_cent(Ms, ys, xk_1);
         
